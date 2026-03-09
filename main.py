@@ -15,6 +15,18 @@ def analyze_numbers(numbers: list[int | float]) -> dict:
     }
 
 
+def calculate_median(numbers: list[int | float]) -> float | None:
+    """Return the median of a list of numbers."""
+    if not numbers:
+        return None
+    sorted_nums = sorted(numbers)
+    n = len(sorted_nums)
+    mid = n // 2
+    if n % 2 == 0:
+        return (sorted_nums[mid - 1] + sorted_nums[mid]) / 2
+    return sorted_nums[mid]
+
+
 def filter_above_mean(numbers: list[int | float]) -> list:
     """Return numbers that are above the mean."""
     stats = analyze_numbers(numbers)
@@ -28,6 +40,9 @@ if __name__ == "__main__":
     stats = analyze_numbers(data)
     for key, value in stats.items():
         print(f"  {key}: {value}")
+
+    median = calculate_median(data)
+    print(f"  median: {median}")
 
     above = filter_above_mean(data)
     print(f"\nAbove mean ({stats['mean']:.1f}): {above}")
